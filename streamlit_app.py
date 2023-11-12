@@ -23,5 +23,5 @@ fruits_to_show = my_fruit_list.loc[my_fruit_list.Fruit.isin(fruits_selected)]
 # show df
 st.dataframe(fruits_to_show)
 
-fruityvice_response = requestes.get("https://fruityvice.com/api/fruit/watermelon")
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
 st.text(fruityvice_response)
