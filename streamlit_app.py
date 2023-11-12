@@ -24,7 +24,8 @@ fruits_to_show = my_fruit_list.loc[my_fruit_list.Fruit.isin(fruits_selected)]
 st.dataframe(fruits_to_show)
 
 # Request to Fruityvice API
-fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + "kiwi")
+chosen_fruit = 'kiwi'
+fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{chosen_fruit}")
 
 st.header("Fruityvice Fruit Advice!")
 
