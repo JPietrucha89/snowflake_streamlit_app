@@ -17,7 +17,7 @@ my_fruit_list = pd.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/da
 fruits_selected = st.multiselect("Pick some fruits: ", list(my_fruit_list.Fruit), ['Avocado', 'Strawberries'])
 
 # limit df only to fruits chosen in multiselect picker
-fruits_to_show = my_fruit_list.loc[my_fruit_list.Fruit == 'Avocado']
+fruits_to_show = my_fruit_list.loc[my_fruit_list.Fruit == fruits_selected]
 
 # show df
 st.dataframe(fruits_to_show)
