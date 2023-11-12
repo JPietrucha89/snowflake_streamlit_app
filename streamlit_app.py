@@ -23,11 +23,13 @@ fruits_to_show = my_fruit_list.loc[my_fruit_list.Fruit.isin(fruits_selected)]
 # show df
 st.dataframe(fruits_to_show)
 
-# Request to Fruityvice API
-chosen_fruit = 'kiwi'
-fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{chosen_fruit}")
-
 st.header("Fruityvice Fruit Advice!")
+
+# Request to Fruityvice API
+fruit_choice = st.text_input('What fruit would you like information about?', 'Apple')
+st.write('User entered:', fruit_choice)
+
+fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_choice}")
 
 # get text from response object and normalize returned json
 fruityvice_response_json = fruityvice_response.json()
