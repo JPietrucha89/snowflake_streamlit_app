@@ -11,6 +11,7 @@ def get_fruityvice_data(this_fruit_choice):
   fruityvice_response_json = fruityvice_response.json()
   fruityvice_normalized = pd.json_normalize(fruityvice_response_json)
   return fruityvice_normalized
+  
 ### MAIN ###
 st.title('My Parents\' New Healthy Diner')
 st.header('Breakfast Favorites')
@@ -33,7 +34,6 @@ fruits_to_show = my_fruit_list.loc[my_fruit_list.Fruit.isin(fruits_selected)]
 
 # show df
 st.dataframe(fruits_to_show)
-
 
 ### API CALL ###
 st.header("Fruityvice Fruit Advice!")
@@ -74,7 +74,7 @@ def check_if_fruit_exists_in_snowflake_table(new_fruit):
 def insert_row_to_snowflake_table(new_fruit):
   with my_cnx.cursor() as my_cur:
     #if check_if_fruit_exists_in_snowflake_table(new_fruit) == false:
-    my_cur.execute( "INSERT INTO fruit_load_list values (" + new_fruit + ")" )
+    my_cur.execute( "INSERT INTO fruit_load_list values ('" + new_fruit + "')" )
     # my_cur.commit()
     return f"Thanks for adding {new_fruit}"
     
@@ -82,6 +82,7 @@ add_my_fruit = st.text_input("Which fruit would you like to add?", "jackfruit")
 if st.button("Add a Fruit to the List"):
   my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
   back_from_function = insert_row_to_snowflake_table(add_my_fruit)
+  
 st.stop() # temporarily stop execution of following code
 
 
