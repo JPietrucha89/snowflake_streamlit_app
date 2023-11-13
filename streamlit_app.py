@@ -69,7 +69,7 @@ def check_if_fruit_exists_in_snowflake_table(new_fruit):
       result = false 
     else: 
       result = true
-    return if result
+    return result
     
 def insert_row_to_snowflake_table(new_fruit):
   with my_cnx.cursor() as my_cur:
