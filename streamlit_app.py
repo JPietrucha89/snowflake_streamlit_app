@@ -12,6 +12,7 @@ st.text('🥑🍞 Avocado Toast')
 
 st.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 
+### IMPORT CSV FROM WEB ###
 # import CSV file from web in order to make df
 my_fruit_list = pd.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 
@@ -26,6 +27,7 @@ st.dataframe(fruits_to_show)
 
 st.header("Fruityvice Fruit Advice!")
 
+### API CALL ###
 # Request to Fruityvice API
 fruit_choice = st.text_input('What fruit would you like information about?', 'Apple')
 st.write('User entered:', fruit_choice)
