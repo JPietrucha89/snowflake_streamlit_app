@@ -66,14 +66,14 @@ def check_if_fruit_exists_in_snowflake_table(new_fruit):
   with my_cnx.cursor() as my_cur: 
     count_of_new_fruit_in_table = my_cur.execute( "select count(*) from fruit_load_list where fruit_name = '" + new_fruit + "' )" )
     if count_of_new_fruit_in_table > 0: 
-      result = false 
+      result = False 
     else: 
-      result = true
+      result = True
     return result
     
 def insert_row_to_snowflake_table(new_fruit):
   with my_cnx.cursor() as my_cur:
-    if check_if_fruit_exists_in_snowflake_table(new_fruit) == false:
+    if check_if_fruit_exists_in_snowflake_table(new_fruit) == False:
       my_cur.execute( "INSERT INTO fruit_load_list values ('" + new_fruit + "')" )
       # my_cur.commit()
       return f"Thanks for adding {new_fruit}"
