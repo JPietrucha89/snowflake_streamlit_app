@@ -73,11 +73,13 @@ def check_if_fruit_exists_in_snowflake_table(new_fruit):
     
 def insert_row_to_snowflake_table(new_fruit):
   with my_cnx.cursor() as my_cur:
-    #if check_if_fruit_exists_in_snowflake_table(new_fruit) == false:
-    my_cur.execute( "INSERT INTO fruit_load_list values ('" + new_fruit + "')" )
-    # my_cur.commit()
-    return f"Thanks for adding {new_fruit}"
-    
+    if check_if_fruit_exists_in_snowflake_table(new_fruit) == false:
+      my_cur.execute( "INSERT INTO fruit_load_list values ('" + new_fruit + "')" )
+      # my_cur.commit()
+      return f"Thanks for adding {new_fruit}"
+    else:
+      return f"{new_fruit} already exists in table!"
+      
 add_my_fruit = st.text_input("Which fruit would you like to add?", "jackfruit")
 if st.button("Add a Fruit to the List"):
   my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
