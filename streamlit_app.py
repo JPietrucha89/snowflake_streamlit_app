@@ -50,3 +50,5 @@ my_data_rows = my_cur.fetchall()
 st.header("The fruit load list contains:")
 st.dataframe(my_data_rows)
 
+# allow user to add fruit to the list
+add_my_fruit = st.text_inpu("Which fruit would you like to add?")
