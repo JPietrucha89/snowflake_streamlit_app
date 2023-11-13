@@ -64,7 +64,7 @@ if st.button("Get Fruit Load List"):
 # allow user to add fruit to the list
 def check_if_fruit_exists_in_snowflake_table(new_fruit):
   with my_cnx.cursor() as my_cur: 
-    count_of_new_fruit_in_table = my_cur.execute( f"select count(*) from fruit_load_list where fruit_name = {new_fruit})" )
+    count_of_new_fruit_in_table = my_cur.execute( f"select count(*) from fruit_load_list where fruit_name =" + new_fruit + ")" )
     if count_of_new_fruit_in_table > 0: 
       result = false 
     else: 
@@ -74,7 +74,7 @@ def check_if_fruit_exists_in_snowflake_table(new_fruit):
 def insert_row_to_snowflake_table(new_fruit):
   with my_cnx.cursor() as my_cur:
     if check_if_fruit_exists_in_snowflake_table(new_fruit) == false:
-      my_cur.execute( f"INSERT INTO fruit_load_list values ({new_fruit})" )
+      my_cur.execute( f"INSERT INTO fruit_load_list values (" + new_fruit + ")" )
       # my_cur.commit()
       return f"Thanks for adding {new_fruit}"
     
