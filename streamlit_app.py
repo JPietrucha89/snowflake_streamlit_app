@@ -26,22 +26,24 @@ fruits_to_show = my_fruit_list.loc[my_fruit_list.Fruit.isin(fruits_selected)]
 # show df
 st.dataframe(fruits_to_show)
 
-st.header("Fruityvice Fruit Advice!")
 
 ### API CALL ###
-# Request to Fruityvice API
-fruit_choice = st.text_input('What fruit would you like information about?', 'Apple')
-st.write('User entered:', fruit_choice)
-
-fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_choice}")
-
-# get text from response object and normalize returned json
-fruityvice_response_json = fruityvice_response.json()
-fruityvice_normalized = pd.json_normalize(fruityvice_response_json)
-
-# print normalized json as table
-st.dataframe(fruityvice_normalized)
-
+st.header("Fruityvice Fruit Advice!")
+try:
+  fruit_choice = st.text_input('What fruit would you like information about?', 'Apple')
+  if no fruit_choice:
+    st.error("Please select a fruit to get information.")
+  else:
+    # Request to Fruityvice API
+    fruityvice_response = requests.get(f"https://fruityvice.com/api/fruit/{fruit_choice}")
+    # get text from response object and normalize returned json
+    fruityvice_response_json = fruityvice_response.json()
+    fruityvice_normalized = pd.json_normalize(fruityvice_response_json)
+    # print normalized json as table
+    st.dataframe(fruityvice_normalized)
+except URLError as e:
+  st.error()
+  
 ### CONNECTING TO SNOWFLAKE #####
 st.stop() # temporarily stop execution of following code
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
