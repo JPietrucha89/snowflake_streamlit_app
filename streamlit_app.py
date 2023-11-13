@@ -62,11 +62,17 @@ if st.button("Get Fruit Load List"):
   st.dataframe(my_data_rows)
 
 # allow user to add fruit to the list
-def insert_row_to_snowflake_table(new_fruit):
+def check_if_fruit_exists_in_snowflake_table(new_fruit):
   with my_cnx.cursor() as my_cur: 
-    my_cur.execute( f"INSERT INTO fruit_load_list values ({new_fruit})" )
-    # my_cur.commit()
-    return f"Thanks for adding {new_fruit}"
+    count_of_new_fruit_in_table = my_cur.execute( f"select count(*) from fruit_load_list where fruit_name = {new_fruit})" )
+    return if count_of_new_fruit_in_table > 0 then false else true
+    
+def insert_row_to_snowflake_table(new_fruit):
+  with my_cnx.cursor() as my_cur:
+    if check_if_fruit_exists_in_snowflake_table(new_fruit) = false:
+      my_cur.execute( f"INSERT INTO fruit_load_list values ({new_fruit})" )
+      # my_cur.commit()
+      return f"Thanks for adding {new_fruit}"
     
 add_my_fruit = st.text_input("Which fruit would you like to add?", "jackfruit")
 if st.button("Add a Fruit to the List"):
