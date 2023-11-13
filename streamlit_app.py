@@ -51,6 +51,6 @@ st.header("The fruit load list contains:")
 st.dataframe(my_data_rows)
 
 # allow user to add fruit to the list
-add_my_fruit = st.text_input("Which fruit would you like to add?")
+add_my_fruit = st.text_input("Which fruit would you like to add?", "jackfruit")
 # my_cur.execute("INSERT " & add_my_fruit & " INTO fruit_load_list")
 # my_cur.commit()
