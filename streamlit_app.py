@@ -87,6 +87,7 @@ add_my_fruit = st.text_input("Which fruit would you like to add?", "jackfruit")
 if st.button("Add a Fruit to the List"):
   my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
   back_from_function = insert_row_to_snowflake_table(add_my_fruit)
+  st.write(back_from_function)
   my_cnx.close()
   
 st.stop() # temporarily stop execution of following code
