@@ -88,7 +88,7 @@ my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 with my_cnx.cursor() as my_cur: 
     my_cur.execute( "select count(*) from fruit_load_list where fruit_name = 'banana' " )
     count_of_new_fruit_in_table = my_cur.fetchone()
-    st.text("Number of occurencies: " + int(count_of_new_fruit_in_table[0]))
+    st.text("Number of occurencies: ", int(count_of_new_fruit_in_table[0]))
     if int(count_of_new_fruit_in_table[0]) > 0: 
       result = False 
     else: 
