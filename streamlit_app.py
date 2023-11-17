@@ -67,7 +67,8 @@ def check_if_fruit_exists_in_snowflake_table(new_fruit):
   with my_cnx.cursor() as my_cur: 
     my_cur.execute( "select count(*) from fruit_load_list where fruit_name = '" + new_fruit + "'" )
     count_of_new_fruit_in_table = my_cur.fetchone()
-    if count_of_new_fruit_in_table > 0: 
+    int_count = int(count_of_new_fruit_in_table[0])
+    if int_count > 0: 
       result = True 
     else: 
       result = False
@@ -75,27 +76,12 @@ def check_if_fruit_exists_in_snowflake_table(new_fruit):
     
 def insert_row_to_snowflake_table(new_fruit):
   with my_cnx.cursor() as my_cur:
-    #if check_if_fruit_exists_in_snowflake_table(new_fruit) == False:
+    if check_if_fruit_exists_in_snowflake_table(new_fruit) == False:
      my_cur.execute( "INSERT INTO fruit_load_list values ('" + new_fruit + "')" )
        #my_cur.commit()
      return f"Thanks for adding {new_fruit}"
-    #else:
-      #return f"{new_fruit} already exists in table!"
-
-##### testing
-my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-#st.text(check_if_fruit_exists_in_snowflake_table("banana"))
-with my_cnx.cursor() as my_cur: 
-    my_cur.execute( "select count(*) from fruit_load_list where fruit_name = 'jackfruit' " )
-    count_of_new_fruit_in_table = my_cur.fetchone()
-    int_count = int(count_of_new_fruit_in_table[0])
-    st.write('Number of occurencies: ', int_count)
-    if int_count > 0: 
-      result = True 
-    else: 
-      result = False
-    st.text(result)
-##### testing 
+    else:
+      return f"{new_fruit} already exists in table!"
 
 add_my_fruit = st.text_input("Which fruit would you like to add?", "jackfruit")
 if st.button("Add a Fruit to the List"):
