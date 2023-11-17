@@ -89,6 +89,11 @@ with my_cnx.cursor() as my_cur:
     my_cur.execute( "select count(*) from fruit_load_list where fruit_name = 'banana' " )
     count_of_new_fruit_in_table = my_cur.fetchone()
     st.text(count_of_new_fruit_in_table[0])
+    if count_of_new_fruit_in_table[0] > 0: 
+      result = False 
+    else: 
+      result = True
+    st.text(result)
 ##### testing 
 
 add_my_fruit = st.text_input("Which fruit would you like to add?", "jackfruit")
