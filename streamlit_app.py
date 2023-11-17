@@ -88,8 +88,10 @@ my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 #st.text(check_if_fruit_exists_in_snowflake_table("banana"))
 with my_cnx.cursor() as my_cur: 
     my_cur.execute( "select count(*) from fruit_load_list where fruit_name = 'banana' " )
-    count_of_new_fruit_in_table = my_cur.fetchone()[0][0]
+    count_of_new_fruit_in_table = my_cur.fetchone()
+    st.text(count_of_new_fruit_in_table)
     st.text(count_of_new_fruit_in_table[0])
+    st.text(count_of_new_fruit_in_table[0][0])
 ## testing 
 
 add_my_fruit = st.text_input("Which fruit would you like to add?", "jackfruit")
