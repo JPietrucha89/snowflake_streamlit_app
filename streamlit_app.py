@@ -86,7 +86,7 @@ def insert_row_to_snowflake_table(new_fruit):
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 #st.text(check_if_fruit_exists_in_snowflake_table("banana"))
 with my_cnx.cursor() as my_cur: 
-    my_cur.execute( "select count(*) from fruit_load_list where fruit_name = 'banana' " )
+    my_cur.execute( "select count(*) from fruit_load_list where fruit_name = 'jackfruit' " )
     count_of_new_fruit_in_table = my_cur.fetchone()
     int_count = int(count_of_new_fruit_in_table[0])
     st.write('Number of occurencies: ', int_count)
